@@ -1,0 +1,39 @@
+World world;
+Enemy[] enemies = new Enemy[50];
+Player player;
+
+
+public void setup() {
+  size(1440,900);
+   player = new Player(50,height/2);
+   world = new World();
+}
+
+public void draw() {
+  background(300);
+   player.show();
+    player.move();
+}
+
+public void keyPressed() {
+    if (key == 'w') {
+    player.vel.y = -player.SPEED;
+  }
+  if (key == 'a') {
+    player.vel.x = -player.SPEED;
+  }
+   if (key == 'd') {
+    player.vel.x = player.SPEED;
+  }
+  }
+  public void keyReleased() {
+  if (key == 'w') {
+    player.vel.y = 0;
+  }
+  if (key == 'a') {
+    player.vel.x = 0;
+  }
+  if (key == 'd') {
+    player.vel.x = 0;
+  }
+}
