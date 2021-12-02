@@ -28,15 +28,15 @@ public class Spider {
   }
   
   public void chase(Player p) {
-    ax = map((x-p.x),300,-300,SPEED*-0.01, SPEED*0.01);
-    ay = map((y-p.y),300,-300,SPEED*-0.01,SPEED*0.01);
+    ax = map((x-p.pos.x),300,-300,SPEED*-0.01, SPEED*0.01);
+    ay = map((y-p.pos.y),300,-300,SPEED*-0.01,SPEED*0.01);
     vx += ax;
     vy += ay;
   }
   
   private boolean collides(Spider s, Player p) {
-    return dist((float)s.x, (float)s.y, (float)p.x,(float)p.y) < 10;
-  }
+    return dist((float)s.x, (float)s.y, (float)p.pos.x,(float)p.pos.y) < 10;
+}
   
   public void bite(Player p) {
     p.damage(1);
