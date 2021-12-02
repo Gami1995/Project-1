@@ -4,7 +4,7 @@ public class Player {
   private final int SPEED = 5, SIZE = 20;
   
   public Player(int x, int y) {
-    hp = 100;
+    hp = 10;
     pos = new PVector(x,y);
     vel = new PVector(0,0);
     gravity = new PVector(0,-0.5);
@@ -29,5 +29,37 @@ public class Player {
       canMove = true;
     }
     return canMove;
+  }
+   public void collides(Finish f) {
+    if (this.pos.x >= f.pos.x) {
+      textAlign(CENTER,CENTER);
+      textSize(48);
+      text("You win!",width/2,height/2);
+      noLoop();
+    }
+  }
+   public void collides(Enemy e) {
+    double dist = PVector.sub(this.pos,e.pos).mag();
+    if (dist <= this.SIZE / 2 + e.SIZE / 2) {
+      hp--;
+      if (hp <= 0) {
+        youLose();
+      }
+      System.out.println("HP: "+hp);
+    }
+  }
+   private void youLose() {
+    textAlign(CENTER,CENTER);
+    textSize(48);
+    text("GAME OVER!",width/2,height/2);
+    pos = new PVector(50,height/2);
+    hp = 10;
+  }
+   public void damage(int d) {
+    hp -= d;
+    if (hp <= 0) {
+      youLose();
+    }
+    System.out.println(hp);
   }
 }
