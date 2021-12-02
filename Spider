@@ -1,0 +1,48 @@
+public class Spider {
+  //fields
+  private int x, y;
+  private double vx, vy, ax, ay;
+  private final int SPEED = 20, SIZE = 25, SIGHT = 500;
+  private final color COLOR = color(255,0,0);
+  //constructor
+  public Spider(int x, int y) {
+    this.x = x; //this.x belongs to the spider
+    this.y = y;
+  }
+  //methods
+  public void show() {
+    fill(COLOR);
+    circle(x,y,SIZE);
+  }
+  
+  public void move() {
+    x += vx;
+    y += vy;
+  }
+  
+  public void attack(Spider s, Player p) {
+    chase(p);
+    if (collides(s,p) == true) {
+      bite(p);
+    }
+  }
+  
+  public void chase(Player p) {
+    ax = map((x-p.x),300,-300,SPEED*-0.01, SPEED*0.01);
+    ay = map((y-p.y),300,-300,SPEED*-0.01,SPEED*0.01);
+    vx += ax;
+    vy += ay;
+  }
+  
+  private boolean collides(Spider s, Player p) {
+    return dist((float)s.x, (float)s.y, (float)p.x,(float)p.y) < 10;
+  }
+  
+  public void bite(Player p) {
+    p.damage(1);
+  }
+  
+  public void die() {
+    
+  }
+}
