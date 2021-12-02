@@ -1,18 +1,33 @@
 World world;
 Enemy[] enemies = new Enemy[50];
 Player player;
+Finish finish;
+Spider[] spiders = new Spider[50];
 
 
 public void setup() {
-  size(1440,900);
+  size(1400,800);
    player = new Player(50,height/2);
    world = new World();
+   finish = new Finish(width,height);
+   spawnEnemies();
+   spawnSpiders();
 }
 
 public void draw() {
   background(300);
    player.show();
     player.move();
+   finish.show();
+    player.collides(finish);
+    for (int i = 0; i < enemies.length; i++) {
+    player.collides(enemies[i]);
+    enemies[i].show();    
+    enemies[i].move();
+    enemies[i].collideWorldBounds(world);
+    spiders[i].show(); 
+    spiders[i].move();
+  }
 }
 
 public void keyPressed() {
@@ -35,5 +50,16 @@ public void keyPressed() {
   }
   if (key == 'd') {
     player.vel.x = 0;
+  }
+}
+
+private void spawnEnemies() {
+  for (int i = 0; i < enemies.length; i++) {
+    enemies[i] = new Enemy((int)(Math.random()*world.size.x + world.MARGIN - 20),(int)(Math.random()*world.size.y + world.MARGIN));
+  }
+}
+private void spawnSpiders() {
+  for (int i = 0; i < spiders.length; i++) {
+    spiders[i] = new Spider((int)(Math.random()*world.size.x + world.MARGIN - 20),(int)(Math.random()*world.size.y + world.MARGIN));
   }
 }
