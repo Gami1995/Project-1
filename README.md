@@ -1,2 +1,2 @@
 # Project-1
-A short platformer with multiple enemy types.
+A short level with multiple enemy types.
